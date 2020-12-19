@@ -1,0 +1,26 @@
+{
+  "name": "notesenter",
+  "version": "1.0.0",
+  "description": "A simple note-taking app made in Node.js, Express, MongoDB and EJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "notes",
+    "note-taking",
+    "app",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "EJS"
+  ],
+  "author": "nslcoder",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8"
+  }
+}
