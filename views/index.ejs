@@ -17,17 +17,25 @@
       </nav>
 
     <div class="container">
+        <% notes.forEach(note => { %>
             <div class="card mt-2 border-success">
                 <div class="card-body">
-                    <h5 class="card-title">Article Title</h5>
-                    <p class="text-muted">Posted on 11/11/11 by nslcoder</p>
-                    <p class="card-text">The article description</p>
+                    <h5 class="card-title"><%= note.title %></h5>
+                    
+                    <p class="text-muted">Posted on <%= note.createdAt.toDateString() %> by nslcoder</p>
+                    
+                    <p class="card-text"><%= note.description %></p>
+
                     <div class="btn-group" role="group" aria-lable="buttons">
                         <a href="/edit" class="btn btn-outline-warning">Edit</a>
-                        <button class="btn btn-outline-danger">Delete</button>
-                    </div>
+                        
+                        <form action="/notes/:<%= note._id %>" method="delete">
+                            <button class="btn btn-outline-danger">Delete</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        <% }); %>
     </div>
 </body>
 

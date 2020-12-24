@@ -1,0 +1,66 @@
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const Note = require("./models/Note");
+
+const app = express();
+
+const port = process.env.PORT || 5000;
+const dbURL = process.env.MONGODB_URL;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Setting the view engine
+app.set("view engine", "ejs");
+
+// Connecting to MongoDB
+mongoose.connect(dbURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+})
+.then(() => {
+    console.log("Database connected.");
+})
+.catch(err => {
+    console.log(err);
+});
+
+// Serving the homepage with all the notes
+app.get("/", async (req, res) => {
+    const notes = await Note.find({}).sort({ createdAt: "desc" });
+    res.render("index", { notes: notes });
+});
+
+// Serving the create-a-note page
+app.get("/new", (req, res) => {
+    res.render("new");
+})
+
+// Creating a note
+app.post("/notes", async (req, res) => {
+    try {
+        await Note.create({ title: req.body.title, description: req.body.description })
+        res.redirect("/");
+    } catch(e) {
+        console.log(e);
+    }
+});
+
+// Deleting a note
+app.delete("/notes/:id", async (req, res) => {
+    try {
+        await Note.findByIdAndDelete(req.params.id);
+        res.redirect("/");
+    } catch(e) {
+        console.log(e);
+    }
+})
+
+// Starting the server and listening on a port
+app.listen(port, () => {
+    console.log(`The server is listening on port ${port}.`);
+});
