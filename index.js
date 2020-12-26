@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const methodOverride = require("method-override");
 
 const Note = require("./models/Note");
 
@@ -9,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const dbURL = process.env.MONGODB_URL;
 
-app.use(express.json());
+app.use(methodOverride("_method")); // Overriding the delete method 
 app.use(express.urlencoded({ extended: true }));
 
 // Setting the view engine
@@ -53,7 +54,7 @@ app.post("/notes", async (req, res) => {
 // Deleting a note
 app.delete("/notes/:id", async (req, res) => {
     try {
-        await Note.findByIdAndDelete(req.params.id);
+        await Note.findByIdAndRemove(req.params.id);
         res.redirect("/");
     } catch(e) {
         console.log(e);

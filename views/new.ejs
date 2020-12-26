@@ -9,23 +9,23 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-primary px-5">
+    <div class="container">
+      <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand position-absolute top-50 start-50 translate-middle" href="/"><h2>notesenter</h2></a>
+          <a class="navbar-brand" href="/"><h2>notesenter</h2></a>
           <a href="/new" class="btn btn-outline-light">New Note</a>
         </div>
       </nav>
 
-    <div class="container">
         <form action="/notes" method="post" class="border p-3 m-2 rounded">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" maxlength="100">
+                <input type="text" class="form-control" name="title" maxlength="100" required>
               </div>
 
               <div class="mb-3">
                 <label for="description" class="form-label">Note</label>
-                <textarea class="form-control" name="description" rows="7" maxlength="1000"></textarea>
+                <textarea class="form-control" name="description" rows="7" maxlength="1000" required></textarea>
               </div>
               
               <div class="btn-group" role="group" aria-lable="buttons">

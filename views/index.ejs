@@ -9,14 +9,14 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-primary px-5">
-        <div class="container-fluid">
-          <a class="navbar-brand position-absolute top-50 start-50 translate-middle" href="/"><h2>notesenter</h2></a>
-          <a href="/new" class="btn btn-outline-light">New Note</a>
-        </div>
-      </nav>
-
     <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/"><h2>notesenter</h2></a>
+              <a href="/new" class="btn btn-outline-light">New Note</a>
+            </div>
+          </nav>
+
         <% notes.forEach(note => { %>
             <div class="card mt-2 border-success">
                 <div class="card-body">
@@ -29,7 +29,7 @@
                     <div class="btn-group" role="group" aria-lable="buttons">
                         <a href="/edit" class="btn btn-outline-warning">Edit</a>
                         
-                        <form action="/notes/:<%= note._id %>" method="delete">
+                        <form action="/notes/<%= note._id %>?_method=DELETE" method="post">
                             <button class="btn btn-outline-danger">Delete</button>
                         </div>
                     </form>
