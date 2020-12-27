@@ -41,6 +41,11 @@ app.get("/new", (req, res) => {
     res.render("new");
 })
 
+// Serving the edit-a-note page
+app.get("/edit", (req, res) => {
+    res.render("edit");
+})
+
 // Creating a note
 app.post("/notes", async (req, res) => {
     try {
@@ -50,6 +55,9 @@ app.post("/notes", async (req, res) => {
         console.log(e);
     }
 });
+
+// Editing a note
+
 
 // Deleting a note
 app.delete("/notes/:id", async (req, res) => {

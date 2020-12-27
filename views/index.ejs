@@ -27,7 +27,7 @@
                     <p class="card-text"><%= note.description %></p>
 
                     <div class="btn-group" role="group" aria-lable="buttons">
-                        <a href="/edit" class="btn btn-outline-warning">Edit</a>
+                        <a href="/edit" data-id="<%= note._id %>" class="btn btn-outline-warning">Edit</a>
                         
                         <form action="/notes/<%= note._id %>?_method=DELETE" method="post">
                             <button class="btn btn-outline-danger">Delete</button>
