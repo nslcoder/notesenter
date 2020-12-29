@@ -17,7 +17,7 @@
         </div>
       </nav>
 
-        <form action="/notes" method="post" class="border p-3 m-2 rounded">
+        <form action="/notes/<%= note._id %>?_method=PUT" method="post" class="border p-3 m-2 rounded">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" name="title" maxlength="100" required value="<%= note.title %>">

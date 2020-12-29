@@ -37,7 +37,7 @@ app.get("/", async (req, res) => {
 });
 
 // Serving the create-a-note page
-app.get("/new", (req, res) => {
+app.get("/notes/new", (req, res) => {
     res.render("new");
 })
 
@@ -53,8 +53,22 @@ app.post("/notes", async (req, res) => {
 
 // Editing a note
 app.get("/notes/:id", async (req, res) => {
-    const note = await Note.findById(req.params.id);
-    res.render("edit", { note: note })
+    try {
+        const note = await Note.findById(req.params.id);
+        res.render("edit", { note: note })
+    } catch(e) {
+        console.log(e);
+    }
+});
+
+// Saving the edited note or updating the note
+app.put("/notes/:id", async (req, res) => {
+    try {
+        await Note.findByIdAndUpdate(req.params.id, req.body);
+        res.redirect("/");
+    } catch(e) {
+        console.log(e);
+    }
 })
 
 // Deleting a note
