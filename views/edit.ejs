@@ -20,12 +20,12 @@
         <form action="/notes" method="post" class="border p-3 m-2 rounded">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" maxlength="100" required>
+                <input type="text" class="form-control" name="title" maxlength="100" required value="<%= note.title %>">
               </div>
 
               <div class="mb-3">
                 <label for="description" class="form-label">Note</label>
-                <textarea class="form-control" name="description" rows="7" maxlength="1000" required></textarea>
+                <textarea class="form-control" name="description" rows="7" maxlength="1000" required><%= note.description %></textarea>
               </div>
               
               <div class="btn-group" role="group" aria-lable="buttons">
