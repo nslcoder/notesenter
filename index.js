@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const methodOverride = require("method-override");
 
+const notesRoutes = require("./routes/routes");
 const Note = require("./models/Note");
 
 const app = express();
@@ -36,50 +37,7 @@ app.get("/", async (req, res) => {
     res.render("index", { notes: notes });
 });
 
-// Serving the create-a-note page
-app.get("/notes/new", (req, res) => {
-    res.render("new");
-})
-
-// Creating a note
-app.post("/notes", async (req, res) => {
-    try {
-        await Note.create({ title: req.body.title, description: req.body.description })
-        res.redirect("/");
-    } catch(e) {
-        console.log(e);
-    }
-});
-
-// Editing a note
-app.get("/notes/:id", async (req, res) => {
-    try {
-        const note = await Note.findById(req.params.id);
-        res.render("edit", { note: note })
-    } catch(e) {
-        console.log(e);
-    }
-});
-
-// Saving the edited note or updating the note
-app.put("/notes/:id", async (req, res) => {
-    try {
-        await Note.findByIdAndUpdate(req.params.id, req.body);
-        res.redirect("/");
-    } catch(e) {
-        console.log(e);
-    }
-})
-
-// Deleting a note
-app.delete("/notes/:id", async (req, res) => {
-    try {
-        await Note.findByIdAndRemove(req.params.id);
-        res.redirect("/");
-    } catch(e) {
-        console.log(e);
-    }
-})
+app.use("/notes", notesRoutes);
 
 // Starting the server and listening on a port
 app.listen(port, () => {
