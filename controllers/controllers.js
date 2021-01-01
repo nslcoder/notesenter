@@ -1,3 +1,4 @@
+const marked = require("marked");
 const Note = require("../models/Note");
 
 // Rendering the create-a-note page
@@ -8,7 +9,7 @@ const renderNewNote = async (req, res) => {
 // Creating a note
 const createNote =  async (req, res) => {
     try {
-        await Note.create({ title: req.body.title, description: req.body.description })
+        await Note.create({ title: req.body.title, description: marked(req.body.description) })
         res.redirect("/");
     } catch(e) {
         console.log(e);
