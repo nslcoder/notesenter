@@ -24,7 +24,7 @@
                     
                     <p class="text-muted">Posted on <%= note.createdAt.toDateString() %> by nslcoder</p>
                     
-                    <p class="card-text"><%= note.description %></p>
+                    <p class="card-text"><%- note.description %></p>
 
                     <div class="btn-group" role="group" aria-lable="buttons">
                         <form action="/notes/<%= note._id %>" method="get">

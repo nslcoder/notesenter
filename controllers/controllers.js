@@ -14,7 +14,7 @@ const renderNewNote = async (req, res) => {
 // Creating a note
 const createNote =  async (req, res) => {
     try {
-        await Note.create({ title: req.body.title, description: req.body.description })
+        await Note.create({ title: req.body.title, description: marked(req.body.description) })
         res.redirect("/");
     } catch(e) {
         console.log(e);
@@ -34,7 +34,7 @@ const findNote = async (req, res) => {
 // Saving the edited note
 const updateNote = async (req, res) => {
     try {
-        await Note.findByIdAndUpdate(req.params.id, req.body);
+        await Note.findByIdAndUpdate(req.params.id, marked(req.body));
         res.redirect("/");
     } catch(e) {
         console.log(e);
