@@ -12,6 +12,7 @@ const port = process.env.PORT || 5000;
 const dbURL = process.env.MONGODB_URL;
 
 app.use(methodOverride("_method")); // Overriding the delete method 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Setting the view engine

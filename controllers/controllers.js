@@ -34,7 +34,8 @@ const findNote = async (req, res) => {
 // Saving the edited note
 const updateNote = async (req, res) => {
     try {
-        await Note.findByIdAndUpdate(req.params.id, marked(req.body));
+        let { description } = marked(req.body.description);
+        await Note.findByIdAndUpdate(req.params.id, req.body);
         res.redirect("/");
     } catch(e) {
         console.log(e);
