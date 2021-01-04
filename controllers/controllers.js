@@ -1,5 +1,10 @@
 const marked = require("marked");
+/* const createDOMPurify = require("dompurify");
+const { JSDOM } = require("jsdom"); */
 const Note = require("../models/Note");
+
+/* const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window); */
 
 // Rendering the create-a-note page
 const renderNewNote = async (req, res) => {
@@ -9,7 +14,7 @@ const renderNewNote = async (req, res) => {
 // Creating a note
 const createNote =  async (req, res) => {
     try {
-        await Note.create({ title: req.body.title, description: marked(req.body.description) })
+        await Note.create({ title: req.body.title, description: req.body.description })
         res.redirect("/");
     } catch(e) {
         console.log(e);
