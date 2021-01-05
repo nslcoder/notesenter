@@ -26,15 +26,21 @@ const findNote = async (req, res) => {
 };
 
 // Saving the edited note
-const updateNote = async (req, res, next) => {
-/*     try {
-        await Note.findByIdAndUpdate(req.params.id, req.body, { runValidators: true });
+const updateNote = async (req, res) => {
+    try {
+        // Pre and post save() hooks aren't executed on update(), findOneAndUpdate(), etc, so the workaround is to use findById() and save() separately
+        const note = await Note.findById(req.params.id);
+
+        // Modifying the note properties 
+        note.title = req.body.title;
+        note.description = req.body.description;
+        
+        // Saving the updated note
+        await note.save();
         res.redirect("/");
     } catch(e) {
         console.log(e);
-    } */
-    req.note = await Note.findById(req.params.id);
-    next();
+    }
 };
 
 // Deleting a note
@@ -47,25 +53,10 @@ const deleteNote = async (req, res) => {
     }
 };
 
-const saveNote = (path) => {
-    return async (req, res) => {
-        let note = req.note;
-        note.title = req.body.title;
-        note.description = req.body.description;
-        try {
-            note = await note.save();
-            res.redirect("/");
-        } catch(e) {
-            console.log(e);
-        }
-    }
-}
-
 module.exports = {
     renderNewNote,
     createNote,
     findNote,
     updateNote,
-    deleteNote,
-    saveNote
+    deleteNote
 };

@@ -13,7 +13,7 @@ const NoteSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
     sanitizedHTML: {
         type: String,
@@ -30,6 +30,6 @@ NoteSchema.pre("validate", function(next) {
     }
 
     next()
-})
+});
 
 module.exports = mongoose.model("Note", NoteSchema);
