@@ -21,8 +21,7 @@ const NoteSchema = new mongoose.Schema({
     }
 }, 
 {
-    timestamps: true,
-    capped: { size: 1024, max: 5000 }
+    timestamps: true
 });
 
 NoteSchema.pre("validate", function(next) {

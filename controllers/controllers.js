@@ -7,7 +7,9 @@ const renderNewNote = async (req, res) => {
 
 // Creating a note
 const createNote =  async (req, res) => {
-    try {
+    try { 
+        const noteCount = await Note.find({});
+        if(noteCount.length > 3) return res.send("The database has reached its limit.");
         await Note.create({ title: req.body.title, description: req.body.description })
         res.redirect("/");
     } catch(e) {
