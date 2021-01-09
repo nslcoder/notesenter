@@ -27,6 +27,10 @@
                 <label for="description" class="form-label">Note</label>
                 <textarea class="form-control" name="description" rows="7" maxlength="1000" placeholder="1000 characters limit" required></textarea>
               </div>
+
+              <div class="alert alert-info d-block <%= info %>" role="alert">
+                The database has reached its limit.
+              </div>
               
               <div class="btn-group" role="group" aria-lable="buttons">
                   <button class="btn btn-outline-danger">Save</button>

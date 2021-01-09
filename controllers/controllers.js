@@ -2,14 +2,14 @@ const Note = require("../models/Note");
 
 // Rendering the create-a-note page
 const renderNewNote = async (req, res) => {
-    res.render("new");
+    res.render("new", { info: "d-none" });
 };
 
 // Creating a note
 const createNote =  async (req, res) => {
     try { 
         const noteCount = await Note.find({});
-        if(noteCount.length > 3) return res.send("The database has reached its limit.");
+        if(noteCount.length > 4) return res.render("new", { info: "d-block" });
         await Note.create({ title: req.body.title, description: req.body.description })
         res.redirect("/");
     } catch(e) {
